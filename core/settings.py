@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'django_filters',  # Enable the inner app 
+    'storages',
     # 'simple_history',
 ]
 
@@ -155,3 +156,14 @@ STATICFILES_DIRS = (
 )
 #############################################################
 #############################################################
+
+#S3 BUCKETS CONFIG
+# '''
+AWS_ACCESS_KEY_ID = 'AKIAXB3NDRIFLR37AZ7H'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'eric-aiot-bucket'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# '''

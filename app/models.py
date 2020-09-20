@@ -64,11 +64,44 @@ class Time_opt(models.Model):
     
 
     
-class ericapp_peoplemove(models.Model):
-    ps = models.CharField(max_length=200) 
-    getin = models.CharField(max_length=200) 
-    date_created = models.DateTimeField(auto_now_add=True) 
-    out = models.CharField(max_length=200) 
+# class ericapp_peoplemove(models.Model):
+#     ps = models.CharField(max_length=200) 
+#     getin = models.CharField(max_length=200) 
+#     date_created = models.DateTimeField(auto_now_add=True) 
+#     out = models.CharField(max_length=200) 
+
+#     def __str__(self):
+#         return "{}, people enter : {}, people depart : {}.".format(self.date_created, self.getin, self.out)
+
+#     class Meta:
+#         db_table = 'ericapp_peoplemove'
+
+
+# class ericapp_agender(models.Model):
+#     ps = models.CharField(max_length=200) 
+#     date_created = models.DateTimeField(auto_now_add=True)
+#     age = models.CharField(max_length=200) 
+#     gender = models.CharField(max_length=200) 
+
+
+#     # history = HistoricalRecords()
+
+#     def __str__(self):
+#         return "{}, Gender : {}, Age : {}.".format(self.date_created, self.gender, self.age)
+#     class Meta:
+#         db_table = 'ericapp_agender'
+
+
+
+#############################################################################
+
+class peoplemove(models.Model):
+    ps = models.CharField(max_length=200, null=True)
+    getin = models.CharField(max_length=200, null=True)
+    out = models.CharField(max_length=200, null=True)
+	# email = models.CharField(max_length=200, null=True)
+	# email = models.DateTimeField(auto_now_add=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return "{}, people enter : {}, people depart : {}.".format(self.date_created, self.getin, self.out)
@@ -77,19 +110,45 @@ class ericapp_peoplemove(models.Model):
         db_table = 'ericapp_peoplemove'
 
 
-class ericapp_agender(models.Model):
-    ps = models.CharField(max_length=200) 
-    date_created = models.DateTimeField(auto_now_add=True)
-    age = models.CharField(max_length=200) 
-    gender = models.CharField(max_length=200) 
+
+class Tag(models.Model):
+	name = models.CharField(max_length=200, null=True)
+
+	def __str__(self):
+		return self.name
 
 
-    # history = HistoricalRecords()
 
+class agender(models.Model):
+	# CATEGORY = (
+	# 		('Indoor', 'Indoor'),
+	# 		('Out Door', 'Out Door'),
+	# 		)
+    ps = models.CharField(max_length=200, null=True)
+    gender = models.CharField(max_length=200, null=True)
+    age = models.CharField(max_length=200, null=True)
+	# category = models.CharField(max_length=200, null=True, choices=CATEGORY)
+	# description = models.CharField(max_length=200, null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+	# tags = models.ManyToManyField(Tag)
+    
     def __str__(self):
-        return "{}, Gender : {}, Age : {} is comming".format(
-            self.date_created,
-            self.gender,
-            self.age)
+        return "{}, Gender : {}, Age : {}.".format(self.date_created, self.gender, self.age)
     class Meta:
         db_table = 'ericapp_agender'
+
+
+
+class Order(models.Model):
+	STATUS = (
+			('indoor', 'indoor'),
+			('go out', 'go out'),
+			('Delivered', 'Delivered'),
+			)
+
+	customer = models.ForeignKey(peoplemove, null=True, on_delete= models.SET_NULL)
+	product = models.ForeignKey(agender, null=True, on_delete= models.SET_NULL)
+	date_created = models.DateTimeField(auto_now_add=True, null=True)
+	status = models.CharField(max_length=200, null=True, choices=STATUS)
+
+#############################################################################

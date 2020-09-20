@@ -15,13 +15,13 @@ urlpatterns = [
     path("", include("authentication.urls")), # Auth routes - login / register
     path("", include("app.urls")),             # UI Kits Html files
     # path("", ChartView.as_view()),
-    path('showdata/', views.showdata, name='show-data'),
-    url(r'^listone/$', views.listone),
-    url(r'^listall/$', views.listall),
+    # path('showdata/', views.showdata, name='show-data'),
+    # url(r'^listone/$', views.listone),
+    # url(r'^listall/$', views.listall),
 
-    url(r'^insert/$', views.insert),   #新增資料
-    url(r'^modify/$', views.modify),   #修改資料
-    url(r'^delete/$', views.delete),   #刪除資料
+    # url(r'^insert/$', views.insert),   #新增資料
+    # url(r'^modify/$', views.modify),   #修改資料
+    # url(r'^delete/$', views.delete),   #刪除資料
 
 
 ]

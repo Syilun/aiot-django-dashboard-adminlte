@@ -32,53 +32,7 @@
 {% endblock stylesheets %}
 
 {% block scripts %}
-<script>
-$(document).ready(function(){
 
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [{
-              label: '# of Votes',
-              data: [12, 19, 3, 5, 2, 3],
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
-          }
-      }
-  });
-
-  
-
-
-});
-
-</script>
 {% endblock scripts %}
 
 {% block content %}
@@ -113,8 +67,8 @@ $(document).ready(function(){
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>{{ count_in }}<sup style="font-size: 15px">人</sup></h3>
-                <p>累積人次</p>
+                <h3>{{ pre_count }}<sup style="font-size: 15px">人</sup></h3>
+                <p>場內人數估計</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -127,8 +81,8 @@ $(document).ready(function(){
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>{{ pre_count }}<sup style="font-size: 15px">人</sup></h3>
-                <p>場內人數估計</p>
+                <h3>{{ people_in }}<sup style="font-size: 15px">人</sup></h3>
+                <p>累積進場人數</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -141,8 +95,8 @@ $(document).ready(function(){
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>??</h3>
-                <p>總男女比</p>
+                <h3>{{ people_out }}<sup style="font-size: 15px">人</sup></h3>
+                <p>離開人數</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
@@ -156,7 +110,7 @@ $(document).ready(function(){
             <div class="small-box bg-danger">
               <div class="inner">
                 <h3>??</h3>
-                <p>總年齡比例</p>
+                <p>男女比</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -218,64 +172,72 @@ $(document).ready(function(){
                   <script src="https://code.highcharts.com/modules/exporting.js"></script>
                   <script src="https://code.highcharts.com/modules/export-data.js"></script>
                   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-                  
+
+                  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+                  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+                  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+                  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
                   <figure class="highcharts-figure">
-                    <div id="container"></div>
-                    <!-- <p class="highcharts-description">
-                      This demo shows a smoothed area chart with an x-axis plot band
-                      highlighting an area of interest at the last two points. Plot bands
-                      and plot lines are commonly used to draw attention to certain areas or
-                      thresholds.
-                    </p> -->
+                      <div id="container0"></div>
                   </figure>
 
                   <style>
-                    #container {
-                      height: 400px; 
+                    #container0 {
+                        height: 400px; 
                     }
 
                     .highcharts-figure, .highcharts-data-table table {
-                      min-width: 310px; 
-                      max-width: 800px;
-                      margin: 1em auto;
+                        min-width: 310px; 
+                        max-width: 800px;
+                        margin: 1em auto;
                     }
 
                     .highcharts-data-table table {
-                      font-family: Verdana, sans-serif;
-                      border-collapse: collapse;
-                      border: 1px solid #EBEBEB;
-                      margin: 10px auto;
-                      text-align: center;
-                      width: 100%;
-                      max-width: 500px;
+                        font-family: Verdana, sans-serif;
+                        border-collapse: collapse;
+                        border: 1px solid #EBEBEB;
+                        margin: 10px auto;
+                        text-align: center;
+                        width: 100%;
+                        max-width: 500px;
                     }
                     .highcharts-data-table caption {
-                      padding: 1em 0;
-                      font-size: 1.2em;
-                      color: #555;
+                        padding: 1em 0;
+                        font-size: 1.2em;
+                        color: #555;
                     }
                     .highcharts-data-table th {
                       font-weight: 600;
-                      padding: 0.5em;
+                        padding: 0.5em;
                     }
                     .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-                      padding: 0.5em;
+                        padding: 0.5em;
                     }
                     .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-                      background: #f8f8f8;
+                        background: #f8f8f8;
                     }
                     .highcharts-data-table tr:hover {
-                      background: #f1f7ff;
+                        background: #f1f7ff;
                     }
+
                   </style>    
-                  
+                  <input type="text" name="daterange" value="09/21/2020 - 09/21/2020" />
                   <script>
-                    Highcharts.chart('container', {
+                    $(function() {
+                      $('input[name="daterange"]').daterangepicker({
+                        opens: 'left'
+                      }, function(start, end, label) {
+                        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                      });
+                    });
+
+                    Highcharts.chart('container0', {
                       chart: {
                         type: 'areaspline'
                       },
                       title: {
-                        text: 'Average fruit consumption during one week'
+                        text: 'Foot Traffic Analytics'
                       },
                       legend: {
                         layout: 'vertical',
@@ -294,13 +256,13 @@ $(document).ready(function(){
 
                       plotOptions: {
                         series: {
-                            pointStart: Date.UTC(2010, 0, 1),
+                            pointStart: Date.UTC(2020, 8, 21),
                             pointInterval: 24 * 3600 * 1000 // one day
                         }
                       },
                       yAxis: {
                         title: {
-                          text: 'Fruit units'
+                          text: 'Number of Customers'
                         }
                       },
                       tooltip: {
@@ -884,11 +846,11 @@ $(document).ready(function(){
                   <div id="container5"></div>
                 </figure>
                 
-                <div id="button-bar">
+                <!-- <div id="button-bar">
                   <button id="small">Small</button>
                   <button id="large">Large</button>
                   <button id="auto">Auto</button>
-                </div>
+                </div> -->
 
 
                   <style>
@@ -979,12 +941,12 @@ $(document).ready(function(){
                     },
 
                     title: {
-                      text: '性別年齡分析'
+                      text: 'Age-Gender Analytics'
                     },
 
-                    subtitle: {
-                      text: 'Resize the frame or click buttons to change appearance'
-                    },
+                    // subtitle: {
+                    //   text: 'Resize the frame or click buttons to change appearance'
+                    // },
 
                     legend: {
                       align: 'right',
@@ -1002,7 +964,7 @@ $(document).ready(function(){
                     yAxis: {
                       allowDecimals: false,
                       title: {
-                        text: 'Amount'
+                        text: 'Number of Customers'
                       }
                     },
 
@@ -1187,102 +1149,560 @@ $(document).ready(function(){
               <!--rowend-->
 
 
+              
+
+            <div class="row">
+              <div class="col-md-6">
+                <script src="https://code.highcharts.com/highcharts.js"></script>
+                <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                <script src="https://code.highcharts.com/modules/export-data.js"></script>
+                <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+                <figure class="highcharts-figure">
+                  <div id="container7"></div>
+                </figure>
+                <style>
+                  .highcharts-figure, .highcharts-data-table table {
+                    min-width: 320px; 
+                    max-width: 800px;
+                    margin: 1em auto;
+                  }
+
+                  .highcharts-data-table table {
+                    font-family: Verdana, sans-serif;
+                    border-collapse: collapse;
+                    border: 1px solid #EBEBEB;
+                    margin: 10px auto;
+                    text-align: center;
+                    width: 100%;
+                    max-width: 500px;
+                  }
+                  .highcharts-data-table caption {
+                    padding: 1em 0;
+                    font-size: 1.2em;
+                    color: #555;
+                  }
+                  .highcharts-data-table th {
+                    font-weight: 600;
+                    padding: 0.5em;
+                  }
+                  .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+                    padding: 0.5em;
+                  }
+                  .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+                    background: #f8f8f8;
+                  }
+                  .highcharts-data-table tr:hover {
+                    background: #f1f7ff;
+                  }
+
+
+                  input[type="number"] {
+                    min-width: 50px;
+                  }
+                </style>
+                <script>
+                  Highcharts.chart('container7', {
+                    chart: {
+                      plotBackgroundColor: null,
+                      plotBorderWidth: null,
+                      plotShadow: false,
+                      type: 'pie'
+                    },
+                    title: {
+                      text: 'Gender'
+                    },
+                    tooltip: {
+                      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    accessibility: {
+                      point: {
+                        valueSuffix: '%'
+                      }
+                    },
+                    plotOptions: {
+                      pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                          enabled: true,
+                          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                      }
+                    },
+                    series: [{
+                      name: 'Gender',
+                      colorByPoint: true,
+                      data: [{
+                        name: 'Male',
+                        y: {{age_M}},
+                        sliced: true,
+                        selected: true
+                      }, {
+                        name: 'Female',
+                        y: {{age_F}}
+                      }]
+                    }]
+                  });
+                </script>
+              </div>
+
+
+
+              <div class="col-md-6">
+                <script src="https://code.highcharts.com/highcharts.js"></script>
+                <script src="https://code.highcharts.com/modules/series-label.js"></script>
+                <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                <script src="https://code.highcharts.com/modules/export-data.js"></script>
+                <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+                <figure class="highcharts-figure">
+                  <div id="container8"></div>
+                </figure>
+
+                <style>
+                  .highcharts-figure, .highcharts-data-table table {
+                    min-width: 360px; 
+                    max-width: 800px;
+                    margin: 1em auto;
+                  }
+
+                  .highcharts-data-table table {
+                    font-family: Verdana, sans-serif;
+                    border-collapse: collapse;
+                    border: 1px solid #EBEBEB;
+                    margin: 10px auto;
+                    text-align: center;
+                    width: 100%;
+                    max-width: 500px;
+                  }
+                  .highcharts-data-table caption {
+                    padding: 1em 0;
+                    font-size: 1.2em;
+                    color: #555;
+                  }
+                  .highcharts-data-table th {
+                    font-weight: 600;
+                    padding: 0.5em;
+                  }
+                  .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+                    padding: 0.5em;
+                  }
+                  .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+                    background: #f8f8f8;
+                  }
+                  .highcharts-data-table tr:hover {
+                    background: #f1f7ff;
+                  }
+                </style>
+
+                <script>
+                  Highcharts.chart('container8', {
+                    title: {
+                      text: 'Gender'
+                    },
+
+                    yAxis: {
+                      title: {
+                        text: 'Number of Employees'
+                      }
+                    },
+
+                    xAxis: {
+                      accessibility: {
+                        rangeDescription: 'Range: 2010 to 2017'
+                      }
+                    },
+
+                    legend: {
+                      layout: 'vertical',
+                      align: 'right',
+                      verticalAlign: 'middle'
+                    },
+
+                    plotOptions: {
+                      series: {
+                        label: {
+                          connectorAllowed: false
+                        },
+                        pointStart: 2010
+                      }
+                    },
+
+                    series: [{
+                      name: 'Installation',
+                      data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+                    }, {
+                      name: 'Manufacturing',
+                      data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+                    }, {
+                      name: 'Sales & Distribution',
+                      data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+                    }, {
+                      name: 'Project Development',
+                      data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+                    }, {
+                      name: 'Other',
+                      data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+                    }],
+
+                    responsive: {
+                      rules: [{
+                        condition: {
+                          maxWidth: 500
+                        },
+                        chartOptions: {
+                          legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                          }
+                        }
+                      }]
+                    }
+
+                    });
+                </script>
+              </div>
+            <!-- /.row -->  
+          </div>              
+
+
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <script src="https://code.highcharts.com/highcharts.js"></script>
+              <script src="https://code.highcharts.com/modules/exporting.js"></script>
+              <script src="https://code.highcharts.com/modules/export-data.js"></script>
+              <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+              <figure class="highcharts-figure">
+                <div id="container9"></div>
+              </figure>
+              <style>
+                .highcharts-figure, .highcharts-data-table table {
+                  min-width: 320px; 
+                  max-width: 800px;
+                  margin: 1em auto;
+                }
+
+                .highcharts-data-table table {
+                  font-family: Verdana, sans-serif;
+                  border-collapse: collapse;
+                  border: 1px solid #EBEBEB;
+                  margin: 10px auto;
+                  text-align: center;
+                  width: 100%;
+                  max-width: 500px;
+                }
+                .highcharts-data-table caption {
+                  padding: 1em 0;
+                  font-size: 1.2em;
+                  color: #555;
+                }
+                .highcharts-data-table th {
+                  font-weight: 600;
+                  padding: 0.5em;
+                }
+                .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+                  padding: 0.5em;
+                }
+                .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+                  background: #f8f8f8;
+                }
+                .highcharts-data-table tr:hover {
+                  background: #f1f7ff;
+                }
+
+
+                input[type="number"] {
+                  min-width: 50px;
+                }
+              </style>
+              <script>
+                Highcharts.chart('container9', {
+                  chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                  },
+                  title: {
+                    text: 'Age'
+                  },
+                  tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                  },
+                  accessibility: {
+                    point: {
+                      valueSuffix: '%'
+                    }
+                  },
+                  plotOptions: {
+                    pie: {
+                      allowPointSelect: true,
+                      cursor: 'pointer',
+                      dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                      }
+                    }
+                  },
+                  series: [{
+                    name: 'Age',
+                    colorByPoint: true,
+                    data: [{
+                      name: '0-9',
+                      y: {{age_0}},
+                      sliced: true,
+                      selected: true
+                    }, {
+                      name: '10-19',
+                      y: {{age_10}}
+                    }, {
+                      name: '20-29',
+                      y: {{age_20}}
+                    }, {
+                      name: '30-39',
+                      y: {{age_30}}
+                    }, {
+                      name: '50-59',
+                      y: {{age_50}}
+                    }, {
+                      name: '60-69',
+                      y: {{age_60}}
+                    }, {
+                      name: '70-79',
+                      y: {{age_70}}
+                    }]
+                  }]
+                });
+              </script>
+            </div>
+
 
 
             <div class="col-md-6">
-              <div class="card">
-                <div class="card-header border-0">
-                  <div class="d-flex justify-content-between">
-                    <h3 class="card-title">性別_年齡比例</h3>
-                    <!-- <a href="javascript:void(0);">View Report</a> -->
-                  </div>
-                </div>
-                <div class="card-body">
-                  <!-- <div class="d-flex">
-                    <p class="d-flex flex-column">
-                      <span class="text-bold text-lg">$18,230.00</span>
-                      <span>Sales Over Time</span>
-                    </p>
-                    <p class="ml-auto d-flex flex-column text-right">
-                      <span class="text-success">
-                        <i class="fas fa-arrow-up"></i> 33.1%
-                      </span>
-                      <span class="text-muted">Since last month</span>
-                    </p>
-                  </div>
-                  <!-- /.d-flex -->
-  
-                  <div class="position-relative mb-4">
-                    <canvas id="sales-chart1" height="100"></canvas>
-                  </div>
-  
-                  <div class="d-flex flex-row justify-content-end">
-                    
-                    <span class="mr-2">
-                      <i class="fas fa-square text-primary"></i> Male
-                    </span>
-  
-                    <span>
-                      <i class="fas fa-square text-gray"></i> Female
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <script src="https://code.highcharts.com/highcharts.js"></script>
+              <script src="https://code.highcharts.com/modules/series-label.js"></script>
+              <script src="https://code.highcharts.com/modules/exporting.js"></script>
+              <script src="https://code.highcharts.com/modules/export-data.js"></script>
+              <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+              <figure class="highcharts-figure">
+                <div id="container10"></div>
+              </figure>
+
+              <style>
+                .highcharts-figure, .highcharts-data-table table {
+                  min-width: 360px; 
+                  max-width: 800px;
+                  margin: 1em auto;
+                }
+
+                .highcharts-data-table table {
+                  font-family: Verdana, sans-serif;
+                  border-collapse: collapse;
+                  border: 1px solid #EBEBEB;
+                  margin: 10px auto;
+                  text-align: center;
+                  width: 100%;
+                  max-width: 500px;
+                }
+                .highcharts-data-table caption {
+                  padding: 1em 0;
+                  font-size: 1.2em;
+                  color: #555;
+                }
+                .highcharts-data-table th {
+                  font-weight: 600;
+                  padding: 0.5em;
+                }
+                .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+                  padding: 0.5em;
+                }
+                .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+                  background: #f8f8f8;
+                }
+                .highcharts-data-table tr:hover {
+                  background: #f1f7ff;
+                }
+              </style>
+
+              <script>
+                Highcharts.chart('container10', {
+                  title: {
+                    text: 'Age'
+                  },
+
+                  yAxis: {
+                    title: {
+                      text: 'Number of Employees'
+                    }
+                  },
+
+                  xAxis: {
+                    accessibility: {
+                      rangeDescription: 'Range: 2010 to 2017'
+                    }
+                  },
+
+                  legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                  },
+
+                  plotOptions: {
+                    series: {
+                      label: {
+                        connectorAllowed: false
+                      },
+                      pointStart: 2010
+                    }
+                  },
+
+                  series: [{
+                    name: 'Installation',
+                    data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+                  }, {
+                    name: 'Manufacturing',
+                    data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+                  }, {
+                    name: 'Sales & Distribution',
+                    data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+                  }, {
+                    name: 'Project Development',
+                    data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+                  }, {
+                    name: 'Other',
+                    data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+                  }],
+
+                  responsive: {
+                    rules: [{
+                      condition: {
+                        maxWidth: 500
+                      },
+                      chartOptions: {
+                        legend: {
+                          layout: 'horizontal',
+                          align: 'center',
+                          verticalAlign: 'bottom'
+                        }
+                      }
+                    }]
+                  }
+
+                  });
+              </script>
             </div>
-              <!-- /.card --> 
+          <!-- /.row -->  
+        </div>      
+
+
+
+              
+
+                <div class="card">
+                  <div class="card-header border-0">
+                    <div class="d-flex justify-content-between">
+                      <h3 class="card-title">性別_年齡比例</h3>
+                      <!-- <a href="javascript:void(0);">View Report</a> -->
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <!-- <div class="d-flex">
+                      <p class="d-flex flex-column">
+                        <span class="text-bold text-lg">$18,230.00</span>
+                        <span>Sales Over Time</span>
+                      </p>
+                      <p class="ml-auto d-flex flex-column text-right">
+                        <span class="text-success">
+                          <i class="fas fa-arrow-up"></i> 33.1%
+                        </span>
+                        <span class="text-muted">Since last month</span>
+                      </p>
+                    </div>
+                    <!-- /.d-flex -->
+    
+                    <div class="position-relative mb-4">
+                      <canvas id="sales-chart1" height="100"></canvas>
+                    </div>
+    
+                    <div class="d-flex flex-row justify-content-end">
+                      
+                      <span class="mr-2">
+                        <i class="fas fa-square text-primary"></i> Male
+                      </span>
+    
+                      <span>
+                        <i class="fas fa-square text-gray"></i> Female
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              <!-- /.col --> 
+              </div>
+                <!-- /.card --> 
 
            
 
-            <!-- solid sales graph -->
+              <!-- solid sales graph -->
             
-            <div class="col-md-6">
-            <div class="card bg-gradient-info">
-              <div class="card-header border-0">
-                <h3 class="card-title">
-                  <i class="fas fa-th mr-1"></i>
-                  年齡分布
-                </h3>
+              <div class="col-md-6">
+                <div class="card bg-gradient-info">
+                  <div class="card-header border-0">
+                    <h3 class="card-title">
+                      <i class="fas fa-th mr-1"></i>
+                      年齡分布
+                    </h3>
 
-                <div class="card-tools">
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
+                    <div class="card-tools">
+                      <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <canvas class="chart" id="line-chart" style="min-height: 140px; height: 140px; max-height: 140px; max-width: 100%;"></canvas>
+                  </div>
+                  </div>
+                  <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+              <!-- /.col -->
+              </div>
+
+
+              <!-- Map card -->
+              <div class="card bg-gradient-primary">
+                <div class="card-header border-0">
+                
+                  <!-- card tools -->
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-primary btn-sm daterange" title="Date range">
+                      <i class="far fa-calendar-alt"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
+                  <!-- /.card-tools -->
+                </div>
+                <div class="card-body">
+                  <!-- <div id="world-map" style="height: 250px; width: 100%;"></div> -->
+                  <div><img src="/static/assets/img/heatmap37.jpg"  width="100%"></div>
+
                 </div>
               </div>
-              <div class="card-body">
-                <canvas class="chart" id="line-chart" style="min-height: 140px; height: 140px; max-height: 140px; max-width: 100%;"></canvas>
-              </div>
-              </div>
-              <!-- /.card-footer -->
+
+            <!-- /.row -->  
             </div>
-            <!-- /.card -->
-          </div>
-          </div>
-
-
-            <!-- Map card -->
-            <div class="card bg-gradient-primary">
-              <div class="card-header border-0">
-               
-                <!-- card tools -->
-                <div class="card-tools">
-                  <button type="button" class="btn btn-primary btn-sm daterange" title="Date range">
-                    <i class="far fa-calendar-alt"></i>
-                  </button>
-                  <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-                <!-- /.card-tools -->
-              </div>
-              <div class="card-body">
-                <!-- <div id="world-map" style="height: 250px; width: 100%;"></div> -->
-                <div><img src="/static/assets/img/heatmap37.jpg"  width="100%"></div>
-
-              </div>
 
               <!-- /.card-body -->
             
