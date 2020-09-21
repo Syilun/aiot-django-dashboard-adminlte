@@ -129,7 +129,7 @@
         <!-- Main row -->
         <div class="row">
           <!-- Left col -->
-          <section class="col-12 ">
+          <section class="col-md-12">
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
               <div class="card-header">
@@ -145,25 +145,9 @@
                     <button type="button" class="btn btn-default btn-sm" data-toggle="off">Off</button>
                   </div>
                 </div>
-
-
-
-                <!-- <div class="card-tools">
-                  <ul class="nav nav-pills ml-auto">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
-                    </li>
-                  </ul>
-                </div> -->
-                
-
-
-              <!-- 換成有提示的線圖 -->
-              <!-- <canvas class="chart" id="visitors-chart1" style="min-height: 140px; height: 140px; max-height: 140px; max-width: 100%;"></canvas> -->
-              </div><!-- /.card-header -->
+              </div>
+            
+              <!-- /.card-header -->
 
 
               <div class="row">
@@ -224,13 +208,13 @@
                   </style>    
                   <input type="text" name="daterange" value="09/21/2020 - 09/21/2020" />
                   <script>
-                    $(function() {
-                      $('input[name="daterange"]').daterangepicker({
-                        opens: 'left'
-                      }, function(start, end, label) {
-                        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-                      });
-                    });
+                    // $(function() {
+                    //   $('input[name="daterange"]').daterangepicker({
+                    //     opens: 'left'
+                    //   }, function(start, end, label) {
+                    //     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                    //   });
+                    // });
 
                     Highcharts.chart('container0', {
                       chart: {
@@ -286,442 +270,41 @@
                       }]
                     });
                   </script>
-
-
-
-
                 </div>
 
-
-
-              <!-- <div class="col-md-6">
-                <script src="https://code.highcharts.com/highcharts.js"></script>
-                <script src="https://code.highcharts.com/modules/data.js"></script>
-                <script src="https://code.highcharts.com/modules/drilldown.js"></script>
-                <script src="https://code.highcharts.com/modules/exporting.js"></script>
-                <script src="https://code.highcharts.com/modules/export-data.js"></script>
-                <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
-                <figure class="highcharts-figure">
-                    <div id="container"></div>
-                    <p class="highcharts-description">
-                        Pie chart where the individual slices can be clicked to expose more
-                        detailed data.
-                    </p>
-                </figure> -->
-
-
-                    <!-- Data from www.netmarketshare.com. Select Browsers => Desktop share by version. Download as tsv. -->
-                <!-- <pre id="tsv" style="display:none">
-                    Browser Version    Total Market Share
-                    Microsoft Internet Explorer 8.0    26.61%
-                    Microsoft Internet Explorer 9.0    16.96%
-                    Chrome 18.0    8.01%
-                    Chrome 19.0    7.73%
-                    Firefox 12    6.72%
-                    Microsoft Internet Explorer 6.0    6.40%
-                    Firefox 11    4.72%
-                    Microsoft Internet Explorer 7.0    3.55%
-                    Safari 5.1    3.53%
-                    Firefox 13    2.16%
-                    Firefox 3.6    1.87%
-                    Opera 11.x    1.30%
-                    Chrome 17.0    1.13%
-                    Firefox 10    0.90%
-                    Safari 5.0    0.85%
-                    Firefox 9.0    0.65%
-                    Firefox 8.0    0.55%
-                    Firefox 4.0    0.50%
-                    Chrome 16.0    0.45%
-                    Firefox 3.0    0.36%
-                    Firefox 3.5    0.36%
-                    Firefox 6.0    0.32%
-                    Firefox 5.0    0.31%
-                    Firefox 7.0    0.29%
-                    Proprietary or Undetectable    0.29%
-                    Chrome 18.0 - Maxthon Edition    0.26%
-                    Chrome 14.0    0.25%
-                    Chrome 20.0    0.24%
-                    Chrome 15.0    0.18%
-                    Chrome 12.0    0.16%
-                    Opera 12.x    0.15%
-                    Safari 4.0    0.14%
-                    Chrome 13.0    0.13%
-                    Safari 4.1    0.12%
-                    Chrome 11.0    0.10%
-                    Firefox 14    0.10%
-                    Firefox 2.0    0.09%
-                    Chrome 10.0    0.09%
-                    Opera 10.x    0.09%
-                    Microsoft Internet Explorer 8.0 - Tencent Traveler Edition    0.09%
-                </pre>
-
-                <style>
-                  .highcharts-figure, .highcharts-data-table table {
-                      min-width: 320px; 
-                      max-width: 660px;
-                      margin: 1em auto;
-                  }
-
-                  .highcharts-data-table table {
-                    font-family: Verdana, sans-serif;
-                    border-collapse: collapse;
-                    border: 1px solid #EBEBEB;
-                    margin: 10px auto;
-                    text-align: center;
-                    width: 100%;
-                    max-width: 500px;
-                  }
-                  .highcharts-data-table caption {
-                      padding: 1em 0;
-                      font-size: 1.2em;
-                      color: #555;
-                  }
-                  .highcharts-data-table th {
-                    font-weight: 600;
-                      padding: 0.5em;
-                  }
-                  .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-                      padding: 0.5em;
-                  }
-                  .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-                      background: #f8f8f8;
-                  }
-                  .highcharts-data-table tr:hover {
-                      background: #f1f7ff;
-                  }
-                </style>
-                
-                <script>
-                  Highcharts.chart('container', {
-                  chart: {
-                      type: 'pie'
-                  },
-                  title: {
-                      text: 'Browser market shares. January, 2018'
-                  },
-                  subtitle: {
-                      text: 'Click the slices to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
-                  },
-
-                  accessibility: {
-                      announceNewData: {
-                          enabled: true
-                      },
-                      point: {
-                          valueSuffix: '%'
-                      }
-                  },
-
-                  plotOptions: {
-                      series: {
-                          dataLabels: {
-                              enabled: true,
-                              format: '{point.name}: {point.y:.1f}%'
-                          }
-                      }
-                  },
-
-                  tooltip: {
-                      headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-                  },
-
-                  series: [
-                      {
-                          name: "Browsers",
-                          colorByPoint: true,
-                          data: [
-                              {
-                                  name: "Chrome",
-                                  y: 62.74,
-                                  drilldown: "Chrome"
-                              },
-                              {
-                                  name: "Firefox",
-                                  y: 10.57,
-                                  drilldown: "Firefox"
-                              },
-                              {
-                                  name: "Internet Explorer",
-                                  y: 7.23,
-                                  drilldown: "Internet Explorer"
-                              },
-                              {
-                                  name: "Safari",
-                                  y: 5.58,
-                                  drilldown: "Safari"
-                              },
-                              {
-                                  name: "Edge",
-                                  y: 4.02,
-                                  drilldown: "Edge"
-                              },
-                              {
-                                  name: "Opera",
-                                  y: 1.92,
-                                  drilldown: "Opera"
-                              },
-                              {
-                                  name: "Other",
-                                  y: 7.62,
-                                  drilldown: null
-                              }
-                          ]
-                      }
-                  ],
-                  drilldown: {
-                      series: [
-                          {
-                              name: "Chrome",
-                              id: "Chrome",
-                              data: [
-                                  [
-                                      "v65.0",
-                                      0.1
-                                  ],
-                                  [
-                                      "v64.0",
-                                      1.3
-                                  ],
-                                  [
-                                      "v63.0",
-                                      53.02
-                                  ],
-                                  [
-                                      "v62.0",
-                                      1.4
-                                  ],
-                                  [
-                                      "v61.0",
-                                      0.88
-                                  ],
-                                  [
-                                      "v60.0",
-                                      0.56
-                                  ],
-                                  [
-                                      "v59.0",
-                                      0.45
-                                  ],
-                                  [
-                                      "v58.0",
-                                      0.49
-                                  ],
-                                  [
-                                      "v57.0",
-                                      0.32
-                                  ],
-                                  [
-                                      "v56.0",
-                                      0.29
-                                  ],
-                                  [
-                                      "v55.0",
-                                      0.79
-                                  ],
-                                  [
-                                      "v54.0",
-                                      0.18
-                                  ],
-                                  [
-                                      "v51.0",
-                                      0.13
-                                  ],
-                                  [
-                                      "v49.0",
-                                      2.16
-                                  ],
-                                  [
-                                      "v48.0",
-                                      0.13
-                                  ],
-                                  [
-                                      "v47.0",
-                                      0.11
-                                  ],
-                                  [
-                                      "v43.0",
-                                      0.17
-                                  ],
-                                  [
-                                      "v29.0",
-                                      0.26
-                                  ]
-                              ]
-                          },
-                          {
-                              name: "Firefox",
-                              id: "Firefox",
-                              data: [
-                                  [
-                                      "v58.0",
-                                      1.02
-                                  ],
-                                  [
-                                      "v57.0",
-                                      7.36
-                                  ],
-                                  [
-                                      "v56.0",
-                                      0.35
-                                  ],
-                                  [
-                                      "v55.0",
-                                      0.11
-                                  ],
-                                  [
-                                      "v54.0",
-                                      0.1
-                                  ],
-                                  [
-                                      "v52.0",
-                                      0.95
-                                  ],
-                                  [
-                                      "v51.0",
-                                      0.15
-                                  ],
-                                  [
-                                      "v50.0",
-                                      0.1
-                                  ],
-                                  [
-                                      "v48.0",
-                                      0.31
-                                  ],
-                                  [
-                                      "v47.0",
-                                      0.12
-                                  ]
-                              ]
-                          },
-                          {
-                              name: "Internet Explorer",
-                              id: "Internet Explorer",
-                              data: [
-                                  [
-                                      "v11.0",
-                                      6.2
-                                  ],
-                                  [
-                                      "v10.0",
-                                      0.29
-                                  ],
-                                  [
-                                      "v9.0",
-                                      0.27
-                                  ],
-                                  [
-                                      "v8.0",
-                                      0.47
-                                  ]
-                              ]
-                          },
-                          {
-                              name: "Safari",
-                              id: "Safari",
-                              data: [
-                                  [
-                                      "v11.0",
-                                      3.39
-                                  ],
-                                  [
-                                      "v10.1",
-                                      0.96
-                                  ],
-                                  [
-                                      "v10.0",
-                                      0.36
-                                  ],
-                                  [
-                                      "v9.1",
-                                      0.54
-                                  ],
-                                  [
-                                      "v9.0",
-                                      0.13
-                                  ],
-                                  [
-                                      "v5.1",
-                                      0.2
-                                  ]
-                              ]
-                          },
-                          {
-                              name: "Edge",
-                              id: "Edge",
-                              data: [
-                                  [
-                                      "v16",
-                                      2.6
-                                  ],
-                                  [
-                                      "v15",
-                                      0.92
-                                  ],
-                                  [
-                                      "v14",
-                                      0.4
-                                  ],
-                                  [
-                                      "v13",
-                                      0.1
-                                  ]
-                              ]
-                          },
-                          {
-                              name: "Opera",
-                              id: "Opera",
-                              data: [
-                                  [
-                                      "v50.0",
-                                      0.96
-                                  ],
-                                  [
-                                      "v49.0",
-                                      0.82
-                                  ],
-                                  [
-                                      "v12.1",
-                                      0.14
-                                  ]
-                              ]
-                          }
-                      ]
-                  }
-              });
-
-              </script>                              
               </div>
- -->
+            <!-- /.card -->
+            </div>
+          </div>
+          </div>
 
-              <!-- <div class="col-md-6">
-                <script src="https://code.highcharts.com/highcharts.js"></script>
-                <script src="https://code.highcharts.com/modules/variable-pie.js"></script>
-                <script src="https://code.highcharts.com/modules/exporting.js"></script>
-                <script src="https://code.highcharts.com/modules/export-data.js"></script>
-                <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-                <figure class="highcharts-figure">
-                    <div id="container4"></div>
-                    <p class="highcharts-description">
-                        Variable radius pie charts can be used to visualize a
-                        second dimension in a pie chart. In this chart, the more
-                        densely populated countries are drawn further out, while the
-                        slice width is determined by the size of the country.
-                    </p>
-                </figure>
+            
+          <div class="row">
+            <div class="col-md-6">
+
+              <!-- edited -->
+              <script src="https://code.highcharts.com/highcharts.js"></script>
+              <script src="https://code.highcharts.com/modules/exporting.js"></script>
+              <script src="https://code.highcharts.com/modules/export-data.js"></script>
+              <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+              
+              <figure class="highcharts-figure">
+                <div id="container5"></div>
+              </figure>
+              
+              <!-- <div id="button-bar">
+                <button id="small">Small</button>
+                <button id="large">Large</button>
+                <button id="auto">Auto</button>
+              </div> -->
+
 
                 <style>
-                  #container4 {
-                    height: 500px;
-                  }
-
                   .highcharts-figure, .highcharts-data-table table {
-                      min-width: 320px; 
-                      max-width: 700px;
-                      margin: 1em auto;
+                    min-width: 310px; 
+                    max-width: 800px;
+                    margin: 1em auto;
                   }
 
                   .highcharts-data-table table {
@@ -734,133 +317,40 @@
                     max-width: 500px;
                   }
                   .highcharts-data-table caption {
-                      padding: 1em 0;
-                      font-size: 1.2em;
-                      color: #555;
+                    padding: 1em 0;
+                    font-size: 1.2em;
+                    color: #555;
                   }
                   .highcharts-data-table th {
                     font-weight: 600;
-                      padding: 0.5em;
+                    padding: 0.5em;
                   }
                   .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-                      padding: 0.5em;
+                    padding: 0.5em;
                   }
                   .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-                      background: #f8f8f8;
+                    background: #f8f8f8;
                   }
                   .highcharts-data-table tr:hover {
-                      background: #f1f7ff;
+                    background: #f1f7ff;
                   }
-                </style>
 
-                <script>
-                  Highcharts.chart('container4', {
-                  chart: {
-                      type: 'variablepie'
-                  },
-                  title: {
-                      text: 'Countries compared by population density and total area.'
-                  },
-                  tooltip: {
-                      headerFormat: '',
-                      pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> {point.name}</b><br/>' +
-                          'Area (square km): <b>{point.y}</b><br/>' +
-                          'Population density (people per square km): <b>{point.z}</b><br/>'
-                  },
-                  series: [{
-                      minPointSize: 10,
-                      innerSize: '20%',
-                      zMin: 0,
-                      name: 'countries',
-                      data: [{
-                          name: 'Spain',
-                          y: 505370,
-                          z: 92.9
-                      }, {
-                          name: 'France',
-                          y: 551500,
-                          z: 118.7
-                      }, {
-                          name: 'Poland',
-                          y: 312685,
-                          z: 124.6
-                      }, {
-                          name: 'Czech Republic',
-                          y: 78867,
-                          z: 137.5
-                      }, {
-                          name: 'Italy',
-                          y: 301340,
-                          z: 201.8
-                      }, {
-                          name: 'Switzerland',
-                          y: 41277,
-                          z: 214.5
-                      }, {
-                          name: 'Germany',
-                          y: 357022,
-                          z: 235.6
-                      }]
-                  }]
-                  });
-                </script>
+                  #button-bar {
+                    min-width: 310px;
+                    max-width: 800px;
+                    margin: 0 auto;
+                  }
+                  #container5 {
+                  height: 400px; 
+                      }
 
-              </div> -->
-            </div>  
-
-
-
-
-
-
-
-              <div class="card-body">
-                <div class="tab-content p-0">
-                  <!-- Morris chart - Sales -->
-                  <div class="chart tab-pane active" id="revenue-chart"
-                        style="position: relative; height: 150px;">
-                      <canvas id="revenue-chart-canvas" height="150" style="height: 150px;"></canvas>
-                    </div>
-                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 150px;">
-                    <canvas id="sales-chart-canvas" height="150" style="height: 150px;"></canvas>
-                  </div>
-                </div>
-              </div><!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <div class="row">
-
-
-
-
-              <div class="col-md-6">
-
-                <!-- edited -->
-                <script src="https://code.highcharts.com/highcharts.js"></script>
-                <script src="https://code.highcharts.com/modules/exporting.js"></script>
-                <script src="https://code.highcharts.com/modules/export-data.js"></script>
-                <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-                
-                <figure class="highcharts-figure">
-                  <div id="container5"></div>
-                </figure>
-                
-                <!-- <div id="button-bar">
-                  <button id="small">Small</button>
-                  <button id="large">Large</button>
-                  <button id="auto">Auto</button>
-                </div> -->
-
-
-                  <style>
-                    .highcharts-figure, .highcharts-data-table table {
+                  .highcharts-figure, .highcharts-data-table table {
                       min-width: 310px; 
                       max-width: 800px;
                       margin: 1em auto;
-                    }
+                  }
 
-                    .highcharts-data-table table {
+                  .highcharts-data-table table {
                       font-family: Verdana, sans-serif;
                       border-collapse: collapse;
                       border: 1px solid #EBEBEB;
@@ -868,159 +358,116 @@
                       text-align: center;
                       width: 100%;
                       max-width: 500px;
-                    }
-                    .highcharts-data-table caption {
+                  }
+                  .highcharts-data-table caption {
                       padding: 1em 0;
                       font-size: 1.2em;
                       color: #555;
-                    }
-                    .highcharts-data-table th {
-                      font-weight: 600;
+                  }
+                  .highcharts-data-table th {
+                    font-weight: 600;
                       padding: 0.5em;
-                    }
-                    .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+                  }
+                  .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
                       padding: 0.5em;
-                    }
-                    .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+                  }
+                  .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
                       background: #f8f8f8;
-                    }
-                    .highcharts-data-table tr:hover {
+                  }
+                  .highcharts-data-table tr:hover {
                       background: #f1f7ff;
-                    }
+                  }
 
-                    #button-bar {
-                      min-width: 310px;
-                      max-width: 800px;
-                      margin: 0 auto;
-                    }
-                    #container5 {
-                    height: 400px; 
-                        }
+                </style>
 
-                    .highcharts-figure, .highcharts-data-table table {
-                        min-width: 310px; 
-                        max-width: 800px;
-                        margin: 1em auto;
-                    }
+                <script>
+                  var chart = Highcharts.chart('container5', {
 
-                    .highcharts-data-table table {
-                        font-family: Verdana, sans-serif;
-                        border-collapse: collapse;
-                        border: 1px solid #EBEBEB;
-                        margin: 10px auto;
-                        text-align: center;
-                        width: 100%;
-                        max-width: 500px;
-                    }
-                    .highcharts-data-table caption {
-                        padding: 1em 0;
-                        font-size: 1.2em;
-                        color: #555;
-                    }
-                    .highcharts-data-table th {
-                      font-weight: 600;
-                        padding: 0.5em;
-                    }
-                    .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-                        padding: 0.5em;
-                    }
-                    .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-                        background: #f8f8f8;
-                    }
-                    .highcharts-data-table tr:hover {
-                        background: #f1f7ff;
-                    }
+                  chart: {
+                    type: 'column'
+                  },
 
-                  </style>
+                  title: {
+                    text: 'Age-Gender Analytics'
+                  },
 
-                  <script>
-                    var chart = Highcharts.chart('container5', {
+                  // subtitle: {
+                  //   text: 'Resize the frame or click buttons to change appearance'
+                  // },
 
-                    chart: {
-                      type: 'column'
-                    },
+                  legend: {
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    layout: 'vertical'
+                  },
 
+                  xAxis: {
+                    categories: ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79'],
+                    labels: {
+                      x: -10
+                    }
+                  },
+
+                  yAxis: {
+                    allowDecimals: false,
                     title: {
-                      text: 'Age-Gender Analytics'
-                    },
-
-                    // subtitle: {
-                    //   text: 'Resize the frame or click buttons to change appearance'
-                    // },
-
-                    legend: {
-                      align: 'right',
-                      verticalAlign: 'middle',
-                      layout: 'vertical'
-                    },
-
-                    xAxis: {
-                      categories: ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79'],
-                      labels: {
-                        x: -10
-                      }
-                    },
-
-                    yAxis: {
-                      allowDecimals: false,
-                      title: {
-                        text: 'Number of Customers'
-                      }
-                    },
-
-                    series: [{
-                        name: 'Male',
-                        data: [{{age_M_0}}, {{age_M_10}},{{age_M_20}}, {{age_M_30}}, {{age_M_40}}, {{age_M_50}}, {{age_M_60}}, {{age_M_70}}]
-                    },{
-                        name: 'Female',
-                        data: [{{age_F_0}}, {{age_F_10}}, {{age_F_20}}, {{age_F_30}}, {{age_F_40}}, {{age_F_50}}, {{age_F_60}}, {{age_F_70}}]
-                    }],
-
-                    responsive: {
-                      rules: [{
-                        condition: {
-                          maxWidth: 500
-                        },
-                        chartOptions: {
-                          legend: {
-                            align: 'center',
-                            verticalAlign: 'bottom',
-                            layout: 'horizontal'
-                          },
-                          yAxis: {
-                            labels: {
-                              align: 'left',
-                              x: 0,
-                              y: -5
-                            },
-                            title: {
-                              text: null
-                            }
-                          },
-                          subtitle: {
-                            text: null
-                          },
-                          credits: {
-                            enabled: false
-                          }
-                        }
-                      }]
+                      text: 'Number of Customers'
                     }
-                    });
+                  },
 
-                    document.getElementById('small').addEventListener('click', function () {
-                    chart.setSize(400);
-                    });
+                  series: [{
+                      name: 'Male',
+                      data: [{{age_M_0}}, {{age_M_10}},{{age_M_20}}, {{age_M_30}}, {{age_M_40}}, {{age_M_50}}, {{age_M_60}}, {{age_M_70}}]
+                  },{
+                      name: 'Female',
+                      data: [{{age_F_0}}, {{age_F_10}}, {{age_F_20}}, {{age_F_30}}, {{age_F_40}}, {{age_F_50}}, {{age_F_60}}, {{age_F_70}}]
+                  }],
 
-                    document.getElementById('large').addEventListener('click', function () {
-                    chart.setSize(600);
-                    });
+                  responsive: {
+                    rules: [{
+                      condition: {
+                        maxWidth: 500
+                      },
+                      chartOptions: {
+                        legend: {
+                          align: 'center',
+                          verticalAlign: 'bottom',
+                          layout: 'horizontal'
+                        },
+                        yAxis: {
+                          labels: {
+                            align: 'left',
+                            x: 0,
+                            y: -5
+                          },
+                          title: {
+                            text: null
+                          }
+                        },
+                        subtitle: {
+                          text: null
+                        },
+                        credits: {
+                          enabled: false
+                        }
+                      }
+                    }]
+                  }
+                  });
 
-                    document.getElementById('auto').addEventListener('click', function () {
-                    chart.setSize(null);
-});
-                  </script>
-                </div>
+                  document.getElementById('small').addEventListener('click', function () {
+                  chart.setSize(400);
+                  });
+
+                  document.getElementById('large').addEventListener('click', function () {
+                  chart.setSize(600);
+                  });
+
+                  document.getElementById('auto').addEventListener('click', function () {
+                  chart.setSize(null);
+                  });
+                </script>
+              </div>
 
 
             
@@ -1598,87 +1045,12 @@
                   });
               </script>
             </div>
+          </div>  
           <!-- /.row -->  
-        </div>      
-
-
-
               
 
-                <div class="card">
-                  <div class="card-header border-0">
-                    <div class="d-flex justify-content-between">
-                      <h3 class="card-title">性別_年齡比例</h3>
-                      <!-- <a href="javascript:void(0);">View Report</a> -->
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <!-- <div class="d-flex">
-                      <p class="d-flex flex-column">
-                        <span class="text-bold text-lg">$18,230.00</span>
-                        <span>Sales Over Time</span>
-                      </p>
-                      <p class="ml-auto d-flex flex-column text-right">
-                        <span class="text-success">
-                          <i class="fas fa-arrow-up"></i> 33.1%
-                        </span>
-                        <span class="text-muted">Since last month</span>
-                      </p>
-                    </div>
-                    <!-- /.d-flex -->
-    
-                    <div class="position-relative mb-4">
-                      <canvas id="sales-chart1" height="100"></canvas>
-                    </div>
-    
-                    <div class="d-flex flex-row justify-content-end">
-                      
-                      <span class="mr-2">
-                        <i class="fas fa-square text-primary"></i> Male
-                      </span>
-    
-                      <span>
-                        <i class="fas fa-square text-gray"></i> Female
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              <!-- /.col --> 
-              </div>
-                <!-- /.card --> 
-
-           
-
-              <!-- solid sales graph -->
-            
-              <div class="col-md-6">
-                <div class="card bg-gradient-info">
-                  <div class="card-header border-0">
-                    <h3 class="card-title">
-                      <i class="fas fa-th mr-1"></i>
-                      年齡分布
-                    </h3>
-
-                    <div class="card-tools">
-                      <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                      </button>
-                      <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <canvas class="chart" id="line-chart" style="min-height: 140px; height: 140px; max-height: 140px; max-width: 100%;"></canvas>
-                  </div>
-                  </div>
-                  <!-- /.card-footer -->
-                </div>
-                <!-- /.card -->
-              <!-- /.col -->
-              </div>
-
-
+          <div class="row">
+            <div class="col-md-6">
               <!-- Map card -->
               <div class="card bg-gradient-primary">
                 <div class="card-header border-0">
@@ -1700,11 +1072,12 @@
 
                 </div>
               </div>
-
-            <!-- /.row -->  
             </div>
+          </div>
+          <!-- /.row -->  
+          
 
-              <!-- /.card-body -->
+            <!-- /.card-body -->
             
       </section>        
 </div>
